@@ -1,0 +1,44 @@
+{
+  "name": "express-json-csv",
+  "version": "0.0.3",
+  "description": "Express JSON to CSV response handler",
+  "keywords": [
+    "connect",
+    "csv",    
+    "express",
+    "json",
+    "http"
+  ],
+  "author": {
+    "name": "Julien Valéry",
+    "email": "darul75@gmail.com"
+  },
+  "bugs": {
+    "url": "http://github.com/darul75/express-json-csv/issues"
+  },
+  "engines": {
+    "node": ">=0.2.0"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "main": "./lib/express-json-csv",
+  "dependencies": {
+    "express": "3.4.6"    
+  },
+  "devDependencies": {
+    "benchmark": ">=0.0.1",
+    "expect.js": "0.2.0",
+    "express": "3.4.0",
+    "grunt": "latest",
+    "grunt-css-usage": "0.0.2",
+    "grunt-contrib-jshint": "latest",
+    "grunt-contrib-uglify": "latest",
+    "mocha": ">= 0.10.2",
+    "supertest": "0.8.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/darul75/express-json-csv.git"
+  }
+}
