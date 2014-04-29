@@ -20,6 +20,8 @@ o.filter = function(req,res,next) {
 
     var json=res.json;
 
+    var apiType = req.apiType;
+
     res.json = function(obj) {  
 
         // allow status / body

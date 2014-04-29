@@ -1,8 +1,11 @@
 var expect = require('expect.js'),
     express = require('express'),
+    load = require('express-load'),
     jsonfiddler = require('../src/jsonfiddler'),
     request = require('supertest');
 
+
+require('./model/example');
 
 describe('field.access.spec', function() {
 
@@ -22,6 +25,8 @@ describe('field.access.spec', function() {
     jsonfiddler.init(opts, app, function() {
       app.enable('jcc');      
     });
+
+    load('model').then('access').into(app);
 
     app.get('/ok', function(req, res){
       var o = {};
@@ -44,7 +49,7 @@ describe('field.access.spec', function() {
     describe('with a malformed URL', function(){
       it('should respond with 404', function(done){
        request(app)
-        .get('/ok')      
+        .get('/example/public/')      
         .expect(200, done);
 
        
