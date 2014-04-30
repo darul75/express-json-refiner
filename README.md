@@ -1,7 +1,7 @@
 express-json-refiner
 ====================
 
-Express JSON refiner by scope api (admin, member...)
+Express JSON refiner middleware by scope api (admin, member...)
 
 Dynamicaly reduce your json response by context's scope of api.
 
@@ -24,7 +24,7 @@ API focused on 'user' is giving json results like:
 }
 ```
 
-And for some reasons depending on context whether it is a 'public' API or 'member' API you may just want expose :
+And for some reasons depending on context whether it is a `public` API or `member` API you may just want to expose :
 
 ```
 {
@@ -33,7 +33,7 @@ And for some reasons depending on context whether it is a 'public' API or 'membe
 }
 ```
 
-Idea is to provide your rules by this way, I give more details below.
+So, idea is to provide your rules by this way, I give more details below:
 
 ```
 var o = {
@@ -67,7 +67,9 @@ app.configure(function() {
 });    
 
 
-// NOTE here I use the best loader for me to load all api scope rules 'express-load' and this one is mandatory to make all working until now ;)
+// NOTE here I use the best loader for me to load all api scope rules 'express-load'
+// This requirement is mandatory to make all working ;)
+
 // See test/ directory example
 
 load('test/model').then('test/access').into(app);
@@ -75,10 +77,15 @@ load('test/model').then('test/access').into(app);
 // where 'test/model' contains Mongoose model (schema) or arbitrary model
 // where 'test/access' contains your json refiner rules, which attributes to keep for each context.
 
+// result is injection of `model` namespace into `app` variable.
+// result is injection of `access` namespace into `app` variable.
+
 var opts = {
   debug: false,
   rules: app.access
 };
+
+// Init refiner with options.
 
 refiner.init(opts, app);
 
