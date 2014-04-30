@@ -14,19 +14,32 @@ module.exports = function(grunt) {
         preserveComments: 'some',
         report: 'min',
         banner: '/*! \n* @license <%= pkg.name %> - v<%= pkg.version %>\n' + 
-         '* (c) 2013 Julien VALERY https://github.com/darul75/express-json-csv\n' +
+         '* (c) 2013 Julien VALERY https://github.com/darul75/express-json-refiner\n' +
          '* License: MIT \n*/\n'
         },         
-        files: {'lib/express-json-csv.js': ['src/express-json-csv.js']
+        files: {'lib/express-json-refiner.js': ['src/refiner.js', 'src/processor.js']
        }
       }
+    },
+    simplemocha: {
+      options: {
+        globals: ['expect'],
+        timeout: 3000,
+        ignoreLeaks: false,        
+        ui: 'bdd',
+        reporter: 'tap',
+        base: './test'
+      },
+
+      all: { src: ['test/**/*.js'] }
     }
 });
 
   // LOAD PLUGINS
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-uglify');  
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-simple-mocha');  
 
   // TASK REGISTER
-  grunt.registerTask('default', ['jshint', 'uglify:task1']);
+  grunt.registerTask('default', ['jshint', 'simplemocha']);
 };

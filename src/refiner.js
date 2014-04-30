@@ -12,15 +12,13 @@ o.init = function(opts) {
 
     opts = opts || {};
     
-    f.extend(o, opts);
+    f.extend(options, opts);
 
 };
 
 o.filter = function(req,res,next) {
 
-    var json=res.json;
-
-    var apiType = req.apiType;
+    var json=res.json;    
 
     res.json = function(obj) {  
 
@@ -35,8 +33,11 @@ o.filter = function(req,res,next) {
             }
         }
 
-        obj.toto = 'coucou';
-        
+        // process        
+
+        if (options.rules && req.api && req.api.model && req.api.scope) {
+            obj = processor(obj, req.api, options);
+        }
 
         json.apply(res,arguments);
     };
