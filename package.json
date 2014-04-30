@@ -1,7 +1,7 @@
 {
   "name": "express-json-refiner",
   "version": "0.0.1",
-  "description": "Express JSON refiner by scope api (admin, member...)",
+  "description": "Express JSON refiner by context's scope of api (admin, member...)",
   "keywords": [
     "connect",
     "express",

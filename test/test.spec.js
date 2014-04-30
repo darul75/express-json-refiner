@@ -1,7 +1,7 @@
 var expect = require('expect.js'),
     express = require('express'),
     load = require('express-load'),
-    jsonfiddler = require('../src/refiner'),
+    refiner = require('../src/refiner'),
     request = require('supertest');
 
 describe('field.access.spec', function() {
@@ -12,7 +12,7 @@ describe('field.access.spec', function() {
     app = express({debug:true});
     app.configure(function() {      
       app.use(express.logger('dev'));
-      app.use(jsonfiddler.filter);
+      app.use(refiner.digest);
     });    
 
     load('test/model').then('test/access').into(app);
@@ -22,13 +22,18 @@ describe('field.access.spec', function() {
       rules: app.access
     };
 
-    jsonfiddler.init(opts, app, function() {
-      app.enable('jcc');
-    });
-
+    refiner.init(opts, app);
 
     app.get('/api1/admin', function(req, res){
       var o = {'field1': '1', 'field2': '2', 'field3': '3'};
+
+      req.api = {model: 'api1', scope:'admin'};
+
+      res.json(o);
+    });
+
+    app.get('/api1-1/admin', function(req, res){
+      var o = [{'field1': '1', 'field2': '2', 'field3': '3'}];
 
       req.api = {model: 'api1', scope:'admin'};
 
@@ -72,6 +77,18 @@ describe('field.access.spec', function() {
        request(app)
         .get('/api1/admin')      
         .expect({'field1': '1'}, done);
+      });
+
+
+      this.timeout(30000);
+
+    });
+
+    describe('api1-1', function(){
+      it('should filter just first field into array elements', function(done){
+       request(app)
+        .get('/api1-1/admin')
+        .expect([{'field1': '1'}], done);
       });
 
 

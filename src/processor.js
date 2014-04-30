@@ -6,8 +6,17 @@ module.exports = function (json, api, options) {
 	var model = api.model; // ex: {model: 'api1', scope:'admin'};
 	var scope = api.scope;
 	
+
 	var fields = options.rules[model].fields[scope];
-	/*var model = options.rules[model].model;*/    
+	/*var model = options.rules[model].model;*/
+
+	if (Array.isArray(json)) {
+		json = json.map(function(elt) {
+			return refine(elt, fields);
+		});
+
+		return json;
+	}   
 
     return refine(json, fields);
 };

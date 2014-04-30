@@ -4,7 +4,8 @@ var o = {};
 
 // defaults
 var options = {        
-    debug: true                
+    debug: true,
+    enable: true
 };  
 
 
@@ -16,31 +17,35 @@ o.init = function(opts) {
 
 };
 
-o.filter = function(req,res,next) {
+o.digest = function(req,res,next) {
 
-    var json=res.json;    
+    if (options.enable) {
 
-    res.json = function(obj) {  
+        var json=res.json;    
 
-        // allow status / body
-        if (2 == arguments.length) {
-            // res.json(body, status) backwards compat
-            if ('number' == typeof arguments[1]) {
-                this.statusCode = arguments[1];
-            } else {
-                this.statusCode = obj;
-                obj = arguments[1];
+        res.json = function(obj) {  
+
+            // allow status / body
+            if (2 == arguments.length) {
+                // res.json(body, status) backwards compat
+                if ('number' == typeof arguments[1]) {
+                    this.statusCode = arguments[1];
+                } else {
+                    this.statusCode = obj;
+                    obj = arguments[1];
+                }
             }
-        }
 
-        // process        
+            // process        
 
-        if (options.rules && req.api && req.api.model && req.api.scope) {
-            obj = processor(obj, req.api, options);
-        }
+            if (options.rules && req.api && req.api.model && req.api.scope) {
+                obj = processor(obj, req.api, options);
+            }
 
-        json.apply(res,arguments);
-    };
+            json.apply(res,arguments);
+        };
+
+    }
 
     next();  
 
