@@ -3,7 +3,6 @@ express-json-refiner
 
 Express JSON refiner by scope api (admin, member...)
 
-=======
 Dynamicaly reduce your json response by context's scope of api.
 
 ## About
