@@ -43,8 +43,9 @@ var userAccessRule = {
 	fields: {
 
 		public: ['field1', 'field3'],
-        	member: ['field2', 'field3'],
-        	admin: ['field1', 'field2', 'field3', 'field4']
+		member: ['field2', 'field3'],
+		admin: ['field1', 'field2', 'field3', 'field4']
+
   	}
   
 };
