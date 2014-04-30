@@ -13,7 +13,7 @@ You may have `public/private/admin`... API and want to deal with response json o
 
 ## Example
 
-API focused on 'user' is giving json results like:
+API focused on 'user' is giving json results (or array) like:
 
 ```
 {
@@ -103,6 +103,10 @@ app.get('/api1/admin', function(req, res){
   // 'admin' is the scope
 
   res.json(o);
+  
+  // result after refine process:
+  
+  // {'field1': '1'}
 });
 
 ```
