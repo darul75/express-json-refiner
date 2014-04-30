@@ -35,7 +35,7 @@ describe('field.access.spec', function() {
     app.get('/api1-1/admin', function(req, res){
       var o = [{'field1': '1', 'field2': '2', 'field3': '3'}];
 
-      req.api = {model: 'api1', scope:'admin'};
+      req.api = {model: 'api1', scope:'member'};
 
       res.json(o);
     });
@@ -85,10 +85,10 @@ describe('field.access.spec', function() {
     });
 
     describe('api1-1', function(){
-      it('should filter just first field into array elements', function(done){
+      it('should filter first 2 fields into array elements', function(done){
        request(app)
         .get('/api1-1/admin')
-        .expect([{'field1': '1'}], done);
+        .expect([{'field1': '1','field2': '2'}], done);
       });
 
 
