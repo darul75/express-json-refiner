@@ -36,15 +36,15 @@ And for some reasons depending on context whether it is a `public` API or `membe
 So, idea is to provide your rules by this way, I give more details below:
 
 ```
-var o = {
+var userAccessRule = {
 
 	model: {field1: '', field2: '', field3: '', field4: ''},
 
 	fields: {
 
 		public: ['field1', 'field3'],
-        member: ['field1', 'field3'],
-        admin: ['field1', 'field2', 'field3', 'field4']
+        	member: ['field2', 'field3'],
+        	admin: ['field1', 'field2', 'field3', 'field4']
   	}
   
 };
@@ -97,7 +97,7 @@ app.get('/api1/admin', function(req, res){
   var o = {'field1': '1', 'field2': '2', 'field3': '3'};
 
   // NOTE before rendering json output, just give api context for refiner to apply.
-  req.api = {model: 'api1', scope:'admin'};
+  req.api = {model: 'api1', scope:'public'};
 
   // 'api1' is a reference for 'access/api1.js' rule file
   // 'admin' is the scope
@@ -106,10 +106,12 @@ app.get('/api1/admin', function(req, res){
   
   // result after refine process:
   
-  // {'field1': '1'}
+  // {'field1': '1', 'field3': 3}
 });
 
 ```
+
+Do not hesitate look at test folder hierarchy files.
 
 Installation
 ------------
