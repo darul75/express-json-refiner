@@ -9,7 +9,7 @@ Dynamicaly reduce your json response by context's scope of api.
 
 The motivation with this module is to provide a way to filter your json response attributes based on context of your apis.
 
-You may have public/private/admin... API and want to deal with response json objects and its visible attributes.
+You may have `public/private/admin`... API and want to deal with response json objects and its visible attributes.
 
 ## Example
 
@@ -57,6 +57,7 @@ In context of Express:
 ```javascript
 
 var refiner = require('express-json-refiner');
+var load = require('express-load');
 
 var app = express();
 
