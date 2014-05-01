@@ -112,6 +112,32 @@ app.get('/api1/admin', function(req, res){
 
 ```
 
+`scope` can be set globaly for instance by this way, example made with `passport-http-bearer`
+
+```javascript
+var checkAdminAccess = function (req, res, next) {  
+
+    if (!req.user || req.user.role !== "admin") {
+
+        var err = new Error('not allowed!');
+
+        err.status = 403;
+
+        next(err);
+
+        return;
+
+    }
+
+    req.api = {scope:'admin'};
+
+    next();
+
+};
+
+app.all('/api/v1/admin/*', passport.authenticate('bearer', { session: false }), checkAdminAccess);
+```
+
 Do not hesitate look at test folder hierarchy files.
 
 Installation
