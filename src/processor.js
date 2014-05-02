@@ -43,7 +43,13 @@ var refine = function (schema, fields) {
 var matchingModel = function(path, rules) {
 
 	var find = _.find(rules, function (rule) {
-		return rule.route && rule.route.match(path).length > 0;
+		if (rule.routes) {
+			for (var i=0;i<rule.routes.length;i++) {
+				var route = rule.routes[i];
+				if (route.match(path).length > 0)
+					return true;
+			}
+		}		
 	});
 
 	return find;

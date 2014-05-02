@@ -4,7 +4,7 @@ module.exports = function (app) {
 
     	model: app.test.model.model1.schema.paths,
 
-    	route: '/api1/admin/user/*',
+    	routes: ['/api1/admin/user/*'],
 
     	fields: {
 	        public: ['field1', 'field3'],
