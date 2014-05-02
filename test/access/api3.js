@@ -2,7 +2,7 @@ module.exports = function (app) {
 
     var o = {
 
-    	model: app.test.model.noMongooseSchema,
+    	model: app.model.noMongooseSchema,
 
     	fields: {
 	        public: ['field1', 'field2', 'field3'],

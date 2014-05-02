@@ -19,7 +19,7 @@ describe('field.access.spec', function() {
 
     var opts = {
       debug: false,
-      rules: app.test.access
+      rules: app.access
     };
 
     refiner.init(opts, app);
