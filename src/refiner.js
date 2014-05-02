@@ -1,4 +1,5 @@
 var processor = require('./processor');
+var _ = require('underscore');
 
 var o = {};
 
@@ -6,8 +7,7 @@ var o = {};
 var options = {        
     debug: true,
     enable: true
-};  
-
+};
 
 o.init = function(opts) {
 
@@ -38,8 +38,8 @@ o.digest = function(req,res,next) {
 
             // process        
 
-            if (options.rules && req.api && req.api.model && req.api.scope) {
-                obj = processor(obj, req.api, options);
+            if (options.rules && req.api && req.api.scope) {
+                obj = processor(obj, req, options);
             }
 
             json.apply(res,arguments);

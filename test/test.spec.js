@@ -27,7 +27,7 @@ describe('field.access.spec', function() {
     app.get('/api1/admin', function(req, res){
       var o = {'field1': '1', 'field2': '2', 'field3': '3'};
 
-      req.api = {model: 'api1', scope:'admin'};
+      req.api = {scope:'admin'};
 
       res.json(o);
     });

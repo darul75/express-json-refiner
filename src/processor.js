@@ -1,14 +1,23 @@
 var _ = require('underscore');
 
+module.exports = function (json, req, options) {
 
-module.exports = function (json, api, options) {
+	var model = req.api.model; // ex: {model: 'api1', scope:'admin'};
+	var scope = req.api.scope;
+	var fields = null;	
 
-	var model = api.model; // ex: {model: 'api1', scope:'admin'};
-	var scope = api.scope;
-	
+	if (!model) { // search it		
+		model = matchingModel(req.route.path, options.rules);
 
-	var fields = options.rules[model].fields[scope];
-	/*var model = options.rules[model].model;*/
+		if (!model)
+			return;
+
+		fields = model.fields[scope];
+
+	}
+	else {
+		fields = options.rules[model].fields[scope];
+	}		
 
 	if (Array.isArray(json)) {
 		json = json.map(function(elt) {
@@ -29,4 +38,13 @@ var refine = function (schema, fields) {
     	}
 	});
 	return json;
+};
+
+var matchingModel = function(path, rules) {
+
+	var find = _.find(rules, function (rule) {
+		return rule.route && rule.route.match(path).length > 0;
+	});
+
+	return find;
 };
