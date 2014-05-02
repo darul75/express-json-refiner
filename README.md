@@ -35,10 +35,29 @@ And for some reasons depending on context whether it is a `public` API or `membe
 
 So, idea is to provide your rules by this way, I give more details below:
 
+CASE 1: no routes defined.
 ```
 var userAccessRule = {
 
 	model: {field1: '', field2: '', field3: '', field4: ''},
+
+	fields: {
+
+		public: ['field1', 'field3'],
+		member: ['field2', 'field3'],
+		admin: ['field1', 'field2', 'field3', 'field4']
+
+  	}
+  
+};
+```
+CASE 2: routes defined.
+```
+var userAccessRule = {
+
+	model: {field1: '', field2: '', field3: '', field4: ''},
+	
+	routes: ['/api1/admin/user/*', '/api1/member/user/*'],
 
 	fields: {
 
@@ -98,7 +117,10 @@ app.get('/api1/admin', function(req, res){
   var o = {'field1': '1', 'field2': '2', 'field3': '3'};
 
   // NOTE before rendering json output, just give api context for refiner to apply.
+  // CASE 1: no routes defined => explicitly give model rule, here 'api1"
   req.api = {model: 'api1', scope:'public'};
+  
+  // CASE 2: routes is defined
 
   // 'api1' is a reference for 'access/api1.js' rule file
   // 'admin' is the scope
