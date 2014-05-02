@@ -15,7 +15,7 @@ describe('field.access.spec', function() {
       app.use(refiner.digest);
     });    
 
-    load('test/model').then('test/access').into(app);
+    load('test/model', {verbose:true}).then('test/access').into(app);
 
     var opts = {
       debug: false,
