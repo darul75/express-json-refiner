@@ -1,5 +1,4 @@
 var processor = require('./processor');
-var _ = require('underscore');
 
 var o = {};
 
@@ -7,7 +6,8 @@ var o = {};
 var options = {        
     debug: true,
     enable: true
-};
+};  
+
 
 o.init = function(opts) {
 
