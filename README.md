@@ -35,7 +35,7 @@ And for some reasons depending on context whether it is a `public` API or `membe
 
 So, idea is to provide your rules by this way, I give more details below:
 
-CASE 1: no routes defined.
+* Case1 : no routes defined
 ```
 var userAccessRule = {
 
@@ -51,7 +51,8 @@ var userAccessRule = {
   
 };
 ```
-CASE 2: routes defined.
+
+* Case2 : routes defined
 ```
 var userAccessRule = {
 
@@ -93,10 +94,10 @@ app.configure(function() {
 
 // See test/ directory example
 
-load('test/model').then('test/access').into(app);
+load('model').then('access').into(app);
 
-// where 'test/model' contains Mongoose model (schema) or arbitrary model
-// where 'test/access' contains your json refiner rules, which attributes to keep for each context.
+// where 'model' contains Mongoose model (schema) or arbitrary model
+// where 'access' contains your json refiner rules, which attributes to keep for each context.
 
 // result is injection of `model` namespace into `app` variable.
 // result is injection of `access` namespace into `app` variable.
@@ -117,10 +118,12 @@ app.get('/api1/admin', function(req, res){
   var o = {'field1': '1', 'field2': '2', 'field3': '3'};
 
   // NOTE before rendering json output, just give api context for refiner to apply.
-  // CASE 1: no routes defined => explicitly give model rule, here 'api1"
+  
+  // CASE 1 : routes not definied => explicitly give rule model, here 'api1"
   req.api = {model: 'api1', scope:'public'};
   
-  // CASE 2: routes is defined
+  // CASE 2 : routes definied => just scope is needeed
+  req.api = {scope:'public'};
 
   // 'api1' is a reference for 'access/api1.js' rule file
   // 'admin' is the scope
