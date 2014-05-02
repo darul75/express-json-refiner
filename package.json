@@ -1,6 +1,6 @@
 {
   "name": "express-json-refiner",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Express JSON refiner middleware by context's scope of api (admin, member...)",
   "keywords": [
     "connect",
