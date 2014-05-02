@@ -2,7 +2,7 @@ module.exports = function (app) {
 
     var o = {
 
-    	model: app.model.model2.schema.paths,
+    	model: app.test.model.model2.schema.paths,
 
     	fields: {
 	        public: ['field1', 'field2', 'field3'],
